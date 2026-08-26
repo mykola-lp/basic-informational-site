@@ -33,7 +33,9 @@ const server = http.createServer((req, res) => {
       fileName = '404.html';
   }
 
-  const filePath = path.join(__dirname, 'pages', fileName);
+  const filePath = fileName === 'index.html'
+    ? path.join(__dirname, fileName)
+    : path.join(__dirname, 'pages', fileName);
 
   // TODO 3: Read the corresponding file (fs.readFile)
   //   https://nodejs.org/learn/manipulating-files/reading-files-with-nodejs
