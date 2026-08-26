@@ -7,6 +7,7 @@ const PORT = 8080;
 // Docs: https://nodejs.org/api/http.html#httpcreateserveroptions-requestlistener
 const server = http.createServer((req, res) => {
   // TODO 1: Get the path from the request (req.url)
+  const url = req.url;
 
   // TODO 2: Determine which HTML file to serve based on the path:
   //   '/'            -> index.html
