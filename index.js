@@ -37,11 +37,19 @@ const server = http.createServer((req, res) => {
 
   // TODO 3: Read the corresponding file (fs.readFile)
   //   https://nodejs.org/learn/manipulating-files/reading-files-with-nodejs
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      res.writeHead(500, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Internal Server Error');
+      return;
+    }
 
-  // TODO 4: Send the file's content to the client (res.writeHead + res.end)
+    const statusCode = fileName === '404.html' ? 404 : 200;
 
-  res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-  res.end('Server is running. Add the page-serving logic in index.js (see TODOs)');
+    // TODO 4: Send the file's content to the client (res.writeHead + res.end)
+    res.writeHead(statusCode, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(data);
+  });
 });
 
 server.listen(PORT, () => {
